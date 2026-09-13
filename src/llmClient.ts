@@ -7,6 +7,7 @@ export async function LLMCall(
 ): Promise<string> {
   const client = new OpenAI({
     apiKey: config.apiKey,
+    baseURL: config.baseURL,
   });
   const res = await client.chat.completions.create({
     messages: [
@@ -15,10 +16,11 @@ export async function LLMCall(
         content: prompt,
       },
     ],
-    model: config.model,
-    temperature: config.temperature,
-    max_tokens: config.maxTokens,
+    model: config.model ?? "gpt-4o-mini",
+    temperature: config.temperature ?? 0.0,
+    max_tokens: config.maxTokens ?? 1000,
   });
+
   return (
     res.choices[0]?.message?.content?.toString() ??
     Promise.reject("No response from LLM")
