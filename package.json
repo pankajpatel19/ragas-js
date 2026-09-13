@@ -5,18 +5,30 @@
   "main": "index.js",
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts",
-    "test" : "vitest run"
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pankajpatel19/ragas-js.git"
   },
-  "keywords": ["LLM", "evaluation", "metrics", "Node.js", "TypeScript", "ragas", "AI"],
+  "keywords": [
+    "LLM",
+    "evaluation",
+    "metrics",
+    "Node.js",
+    "TypeScript",
+    "ragas",
+    "AI"
+  ],
   "author": "Pankaj Patel <pankajpatelinter@gmail.com>",
   "license": "ISC",
   "type": "module",
-  "engines": {"node": ">=18"},
-  "files": ["dist"],
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist"
+  ],
   "bugs": {
     "url": "https://github.com/pankajpatel19/ragas-js/issues"
   },
@@ -29,6 +41,7 @@
   },
   "dependencies": {
     "openai": "^7.15.0",
+    "user": "^0.0.0",
     "zod": "^4.6.4"
   }
 }
