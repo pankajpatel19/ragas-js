@@ -1,0 +1,32 @@
+{
+  "name": "ragas",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000r\u0000a\u0000g\u0000a\u0000s\u0000-\u0000j\u0000s\u0000\r\u0000 \u0000#\u0000 \u0000r\u0000a\u0000g\u0000a\u0000s\u0000-\u0000j\u0000s\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsup src/index.ts --format esm,cjs --dts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pankajpatel19/ragas-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/pankajpatel19/ragas-js/issues"
+  },
+  "homepage": "https://github.com/pankajpatel19/ragas-js#readme",
+  "devDependencies": {
+    "@types/node": "^22.20.2",
+    "tsup": "^8.5.1",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.0"
+  },
+  "dependencies": {
+    "openai": "^7.15.0",
+    "zod": "^4.6.4"
+  }
+}
