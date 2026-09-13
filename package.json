@@ -4,8 +4,8 @@
   "description": "��#\u0000 \u0000r\u0000a\u0000g\u0000a\u0000s\u0000-\u0000j\u0000s\u0000\r\u0000 \u0000#\u0000 \u0000r\u0000a\u0000g\u0000a\u0000s\u0000-\u0000j\u0000s\u0000\r\u0000 \u0000",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsup src/index.ts --format esm,cjs --dts"
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "test" : "vitest run"
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
   "devDependencies": {
     "@types/node": "^22.20.2",
     "tsup": "^8.5.1",
-    "typescript": "^7.0.2",
+    "typescript": "5.9.3",
     "vitest": "^5.0.0"
   },
   "dependencies": {
