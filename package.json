@@ -1,7 +1,7 @@
 {
   "name": "ragas",
   "version": "0.1.0",
-  "description": "��#\u0000 \u0000r\u0000a\u0000g\u0000a\u0000s\u0000-\u0000j\u0000s\u0000\r\u0000 \u0000#\u0000 \u0000r\u0000a\u0000g\u0000a\u0000s\u0000-\u0000j\u0000s\u0000\r\u0000 \u0000",
+  "description": "LLM output evaluation metrics for Node.js/TypeScript",
   "main": "index.js",
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts",
@@ -11,10 +11,11 @@
     "type": "git",
     "url": "git+https://github.com/pankajpatel19/ragas-js.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["LLM", "evaluation", "metrics", "Node.js", "TypeScript", "ragas", "AI"],
+  "author": "Pankaj Patel <pankajpatelinter@gmail.com>",
   "license": "ISC",
   "type": "module",
+  "engines": {"node": ">=18"},
   "bugs": {
     "url": "https://github.com/pankajpatel19/ragas-js/issues"
   },
