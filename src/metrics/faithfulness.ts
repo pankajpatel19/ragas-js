@@ -58,6 +58,6 @@ ${parsed.success ? parsed.data.statements.map((s, i) => `${i + 1}. ${s}`).join("
   };
 }
 
-function cleanJSON(raw: string): string {
+export function cleanJSON(raw: string): string {
   return raw.replace(/```json|```/g, "").trim();
 }
