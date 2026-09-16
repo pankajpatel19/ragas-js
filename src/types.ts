@@ -17,3 +17,8 @@ export interface ContextPrecisionResult {
   score: number;
   verdicts: { context: string; relevant: boolean }[];
 }
+
+export interface ContextRecallResult {
+  score: number;
+  statements: { statement: string; attributed: boolean }[];
+}
