@@ -76,6 +76,34 @@ console.log(result);
 
 **⚠️ Requires a real embeddings-capable provider.** Unlike `faithfulness`, this metric calls an embeddings endpoint. Free chat-only providers like Groq don't support embeddings — use OpenAI directly for this metric.
 
+### `contextPrecision`
+
+Measures how well the retrieved context chunks are ranked by relevance — are the most useful chunks near the top, or buried among irrelevant ones? Useful for evaluating retrieval quality, not just the final answer.
+
+\`\`\`ts
+import { contextPrecision } from "ragas-js";
+
+const result = await contextPrecision(
+{
+question: "What is the capital of France?",
+answer: "Paris is the capital of France.",
+context: [
+"Paris is the capital and most populous city of France.",
+"France is a country in Western Europe.",
+],
+},
+{
+provider: "openai",
+apiKey: process.env.OPENAI_API_KEY!,
+}
+);
+
+console.log(result);
+// { score: 1, verdicts: [{ context: "...", relevant: true }, ...] }
+\`\`\`
+
+**How it works:** the LLM judges each context chunk as relevant or not (in the order given), then computes position-weighted average precision — relevant chunks ranked earlier score higher than the same chunks ranked later. Works with any OpenAI-compatible chat provider (no embeddings needed, so Groq works fine here).
+
 ## Config options
 
 | Option           | Required | Default                   | Notes                                                                          |
@@ -102,13 +130,14 @@ The score is the fraction of statements that were supported (0 to 1).
 - ✅ One metric: `faithfulness`
 - ✅ Works with OpenAI and any OpenAI-compatible provider (Groq, OpenRouter, etc.)
 - ✅ `answerRelevancy` metric
+- ✅ `contextPrecision` metric
 - ❌ No other metrics yet (answerRelevancy, contextPrecision, contextRecall)
 - ❌ No CLI, no dashboard, no persistence
 
 ## Roadmap
 
 - [ ] `answerRelevancy` metric
-- [ ] `contextPrecision` / `contextRecall`
+- [ ] `contextRecall` metric
 - [ ] CLI for running evals against a JSON/CSV dataset
 
 ## License
