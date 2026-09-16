@@ -2,7 +2,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import fs from "fs/promises";
 import path from "path";
-import { faithfulness } from "../src";
+import { contextPrecision, faithfulness } from "../src";
 
 const sampleData = process.argv[2];
 const sampleDataPath = sampleData
@@ -31,7 +31,7 @@ const loadSampleData = async () => {
 const lodedData = await loadSampleData();
 
 for (const item of lodedData) {
-  const faithRes = await faithfulness(item, {
+  const faithRes = await contextPrecision(item, {
     provider: "openai",
     model,
     apiKey,

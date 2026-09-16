@@ -12,3 +12,8 @@ export interface AnswerRelevancyResult {
   score: number;
   generatedQuestions: string[];
 }
+
+export interface ContextPrecisionResult {
+  score: number;
+  verdicts: { context: string; relevant: boolean }[];
+}
