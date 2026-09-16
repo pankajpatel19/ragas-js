@@ -9,7 +9,7 @@ const questionSchema = z.object({
 });
 
 export async function answerRelevancy(
-  input: { question: string[]; answer: string },
+  input: { question: string; answer: string },
   llmConfig: LLMconfig,
 ): Promise<AnswerRelevancyResult> {
   // Implementation for answer relevancy metric
@@ -21,11 +21,7 @@ export async function answerRelevancy(
   const parsedQuestions = questionSchema.safeParse(
     JSON.parse(cleanJSON(rawQuestions)),
   );
-
-  const originalEmbedding = await callEmbedding(
-    llmConfig,
-    input.question.join(" "),
-  );
+  const originalEmbedding = await callEmbedding(llmConfig, input.question);
 
   const generatedEmbeddings = await Promise.all(
     parsedQuestions.success

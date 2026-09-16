@@ -50,16 +50,43 @@ model: "llama-3.3-70b-versatile",
 
 This is useful for testing without an OpenAI billing setup.
 
+### `answerRelevancy`
+
+Measures how well an answer addresses the original question — independent of whether it's factually correct. Useful for catching off-topic or evasive answers.
+
+\`\`\`ts
+import { answerRelevancy } from "ragas-js";
+
+const result = await answerRelevancy(
+{
+question: "What is the capital of France?",
+answer: "Paris is the capital of France.",
+},
+{
+provider: "openai",
+apiKey: process.env.OPENAI_API_KEY!,
+}
+);
+
+console.log(result);
+// { score: 0.94, generatedQuestions: ["What is France's capital?", ...] }
+\`\`\`
+
+**How it works:** the LLM reverse-engineers 3 candidate questions the answer could be responding to, then each is compared to the original question via embedding cosine similarity. Score is the average similarity (0 to 1).
+
+**⚠️ Requires a real embeddings-capable provider.** Unlike `faithfulness`, this metric calls an embeddings endpoint. Free chat-only providers like Groq don't support embeddings — use OpenAI directly for this metric.
+
 ## Config options
 
-| Option        | Required | Default                   | Notes                                                                          |
-| ------------- | -------- | ------------------------- | ------------------------------------------------------------------------------ |
-| `apiKey`      | ✅       | —                         | Your provider API key                                                          |
-| `provider`    | ✅       | —                         | Currently only `"openai"` (works with any OpenAI-compatible API via `baseURL`) |
-| `model`       | ❌       | `gpt-4o-mini`             | Any chat-completion model your provider supports                               |
-| `baseURL`     | ❌       | OpenAI's default endpoint | Override to use a different OpenAI-compatible provider                         |
-| `temperature` | ❌       | `0`                       | Lower = more consistent scoring                                                |
-| `maxTokens`   | ❌       | `1000`                    | Max tokens per LLM call                                                        |
+| Option           | Required | Default                   | Notes                                                                          |
+| ---------------- | -------- | ------------------------- | ------------------------------------------------------------------------------ |
+| `apiKey`         | ✅       | —                         | Your provider API key                                                          |
+| `provider`       | ✅       | —                         | Currently only `"openai"` (works with any OpenAI-compatible API via `baseURL`) |
+| `model`          | ❌       | `gpt-4o-mini`             | Any chat-completion model your provider supports                               |
+| `baseURL`        | ❌       | OpenAI's default endpoint | Override to use a different OpenAI-compatible provider                         |
+| `temperature`    | ❌       | `0`                       | Lower = more consistent scoring                                                |
+| `embeddingModel` | ❌       | text-embedding-3-small    | Used by `answerRelevancy` only                                                 |
+| `maxTokens`      | ❌       | `1000`                    | Max tokens per LLM call                                                        |
 
 ## What it does
 
@@ -74,6 +101,7 @@ The score is the fraction of statements that were supported (0 to 1).
 
 - ✅ One metric: `faithfulness`
 - ✅ Works with OpenAI and any OpenAI-compatible provider (Groq, OpenRouter, etc.)
+- ✅ `answerRelevancy` metric
 - ❌ No other metrics yet (answerRelevancy, contextPrecision, contextRecall)
 - ❌ No CLI, no dashboard, no persistence
 
